@@ -1,0 +1,32 @@
+
+def count_unlucky_tickets(n):
+    dp = {}
+
+    def solve(index, sum_diff, odd_even_diff):
+        if index == n:
+            if sum_diff == 0 and odd_even_diff == 0:
+                return 1
+            else:
+                return 0
+
+        if (index, sum_diff, odd_even_diff) in dp:
+            return dp[(index, sum_diff, odd_even_diff)]
+
+        count = 0
+        for digit in range(10):
+            new_sum_diff = sum_diff - digit if index < n // 2 else sum_diff + digit
+            new_odd_even_diff = odd_even_diff + digit if index % 2 == 0 else odd_even_diff - digit
+            count += solve(index + 1, new_sum_diff, new_odd_even_diff)
+
+        dp[(index, sum_diff, odd_even_diff)] = count
+        return count
+
+    if n % 2 == 0:
+        max_diff = (n // 2) * 9 
+        return solve(0, 0, 0)
+    else:
+        return 0
+
+
+n = int(input())
+print(count_unlucky_tickets(n))
