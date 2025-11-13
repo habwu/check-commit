@@ -1,0 +1,15 @@
+def go():
+    chisl = input().strip()
+    alp = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    alp_dict = {char: idx for idx, char in enumerate(alp)}
+    minsyst = alp_dict[sorted(set(chisl))[-1]] + 1
+    
+    digits = [alp_dict[c] for c in chisl]
+    total_sum = sum(digits)
+    
+    for i in range(max(2, minsyst), 37):
+        if total_sum % (i - 1) == 0:
+            print(i)
+            return
+    print('No solution.')
+go()
