@@ -1,0 +1,12 @@
+n, k = map(int, input().split())
+total_diff = 0
+for _ in range(n):
+    b, g = map(int, input().split())
+    total_diff += (b - g)
+
+x = total_diff + k - 2 * (n + 1)
+
+if x >= 0:
+    print(x)
+else:
+    print("Big Bang!")
